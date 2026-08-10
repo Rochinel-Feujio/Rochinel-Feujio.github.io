@@ -295,6 +295,61 @@
     .tl-item{grid-template-columns:1fr;gap:6px;}
     .tl-item::before,.tl-item .dotmark{display:none;}
   }
+
+  /* ---- Animations ---- */
+  .blob{
+    position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;
+    pointer-events:none;z-index:0;
+  }
+  .blob-1{width:340px;height:340px;background:#4f8cff;top:-120px;right:-80px;animation:blobMove 12s ease-in-out infinite;}
+  .blob-2{width:280px;height:280px;background:#22d3c7;bottom:-100px;left:-60px;animation:blobMove 14s ease-in-out infinite reverse;}
+  @keyframes blobMove{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(30px,-20px) scale(1.08);}
+  }
+  .hero{position:relative;overflow:hidden;}
+  .hero .wrap{position:relative;z-index:1;}
+
+  @keyframes floatChip{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .hero-card{overflow:visible;}
+  .orbit-badge{
+    position:absolute;display:flex;align-items:center;gap:6px;
+    background:var(--surface-2);border:1px solid var(--border);
+    padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;
+    color:var(--text);box-shadow:0 8px 20px rgba(0,0,0,.35);
+    animation:floatChip 4s ease-in-out infinite;
+    z-index:2;white-space:nowrap;
+  }
+  .orbit-badge .dotc{width:7px;height:7px;border-radius:50%;background:var(--accent-2);}
+  .ob-1{top:-14px;left:-18px;animation-delay:0s;}
+  .ob-2{top:20%;right:-30px;animation-delay:.6s;}
+  .ob-3{bottom:16%;left:-34px;animation-delay:1.2s;}
+  .ob-4{bottom:-14px;right:-10px;animation-delay:1.8s;}
+  @media(max-width:880px){.orbit-badge{display:none;}}
+
+  .role-typed{border-right:2px solid var(--accent-2);padding-right:3px;animation:caretBlink .85s steps(1) infinite;}
+  @keyframes caretBlink{0%,49%{border-color:var(--accent-2);}50%,100%{border-color:transparent;}}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .grid-3 .card:nth-child(1){transition-delay:.05s;} .grid-3 .card:nth-child(2){transition-delay:.12s;}
+  .grid-3 .card:nth-child(3){transition-delay:.19s;} .grid-3 .card:nth-child(4){transition-delay:.26s;}
+  .grid-3 .card:nth-child(5){transition-delay:.33s;} .grid-3 .card:nth-child(6){transition-delay:.4s;}
+  .projects-grid .project-card:nth-child(1){transition-delay:.05s;} .projects-grid .project-card:nth-child(2){transition-delay:.18s;}
+  .skills-grid .skill-cat:nth-child(1){transition-delay:.05s;} .skills-grid .skill-cat:nth-child(2){transition-delay:.12s;}
+  .skills-grid .skill-cat:nth-child(3){transition-delay:.19s;} .skills-grid .skill-cat:nth-child(4){transition-delay:.26s;}
+  .skills-grid .skill-cat:nth-child(5){transition-delay:.33s;} .skills-grid .skill-cat:nth-child(6){transition-delay:.4s;}
+  .cert-grid .cert-card:nth-child(1){transition-delay:.05s;} .cert-grid .cert-card:nth-child(2){transition-delay:.12s;}
+  .cert-grid .cert-card:nth-child(3){transition-delay:.19s;} .cert-grid .cert-card:nth-child(4){transition-delay:.26s;}
+
+  .card, .project-card, .cert-card, .skill-cat{transition:transform .15s, border-color .15s, opacity .7s ease, translate .7s ease;}
+  .card:hover, .project-card:hover, .cert-card:hover{transform:translateY(-5px);border-color:var(--accent);}
+
+  header{transition:box-shadow .25s, padding .25s;}
+  header.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.35);}
 </style>
 </head>
 <body>
@@ -317,9 +372,11 @@
 </header>
 
 <section class="hero" id="top">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
   <div class="wrap">
     <div>
-      <span class="badge-pill"><span class="dot"></span> Disponible pour un stage de 5 mois</span>
+      <span class="badge-pill"><span class="dot"></span> Disponible pour une alternance &mdash; a partir de septembre 2026</span>
       <h1>Bonjour, je suis <span>Rochinel FEUJIO</span></h1>
       <p class="lead">Etudiant en <strong>M1 Data Engineering</strong> a ECE Paris, avec des bases solides en
         Data Science et Machine Learning. Je concois des pipelines de donnees complets - preparation,
@@ -338,9 +395,13 @@
       </div>
     </div>
     <div class="hero-card">
+      <span class="orbit-badge ob-1"><span class="dotc"></span> Python</span>
+      <span class="orbit-badge ob-2"><span class="dotc"></span> SQL</span>
+      <span class="orbit-badge ob-3"><span class="dotc"></span> Docker</span>
+      <span class="orbit-badge ob-4"><span class="dotc"></span> ML</span>
       <div class="avatar">RF</div>
       <h3>Rochinel FEUJIO</h3>
-      <div class="role">Data Engineer en formation</div>
+      <div class="role"><span class="role-typed" id="roleTyped">Data Engineer en formation</span></div>
       <div class="chip-row">
         <span class="chip">Python</span>
         <span class="chip">SQL</span>
@@ -362,7 +423,7 @@
 
 <section id="about">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Qui suis-je</span>
       <h2>A propos</h2>
       <p>Data Engineer en formation, avec une solide base en Data Science, Machine Learning et Data Engineering.
@@ -370,49 +431,49 @@
       donnee et developpement d'outils data en environnement professionnel. J'ai concu et industrialise des
       solutions utilisant Python, Flask, SQL, Docker et GitHub Actions, avec une attention particuliere portee
       a la qualite du code, aux tests automatises et a la fiabilite des modeles. Actuellement a la recherche
-      d'un stage de 5 mois en Data Analyst, Data Scientist ou Data Engineer.</p>
+      d'une alternance a partir de septembre 2026, en Data Analyst, Data Scientist ou Data Engineer.</p>
     </div>
   </div>
 </section>
 
 <section id="expertise" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Ce que je fais</span>
       <h2>Mes expertises</h2>
     </div>
     <div class="grid-3">
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#128193;</div>
         <h4>Data Engineering</h4>
         <p>Pipelines de preparation et de modelisation de donnees, gouvernance et qualite de la donnee, automatisation de bout en bout.</p>
         <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Data Modeling</span></div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#128065;</div>
         <h4>Computer Vision &amp; OCR</h4>
         <p>Pretraitement d'image (redressement, detection de flou), extraction de texte OCR bilingue par zones ciblees.</p>
         <div class="tag-row"><span class="tag">OpenCV</span><span class="tag">Tesseract OCR</span></div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#127760;</div>
         <h4>Applications &amp; API</h4>
         <p>Developpement d'API et d'interfaces web avec Flask et Streamlit, tests automatises, deploiement continu.</p>
         <div class="tag-row"><span class="tag">Flask</span><span class="tag">Streamlit</span><span class="tag">Pytest</span></div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#129302;</div>
         <h4>Machine Learning</h4>
         <p>Entrainement et evaluation de modeles (precision, recall, f1-score), approche orientee projets.</p>
         <div class="tag-row"><span class="tag">Machine Learning</span><span class="tag">Power BI</span></div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#128051;</div>
         <h4>DevOps &amp; Deploiement</h4>
         <p>Conteneurisation Docker, integration continue via GitHub Actions, redeploiement automatique.</p>
         <div class="tag-row"><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">CI/CD</span></div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="icon">&#128202;</div>
         <h4>Gestion de projet</h4>
         <p>Suivi d'indicateurs et coordination d'equipes pluridisciplinaires en environnement agile.</p>
@@ -424,13 +485,13 @@
 
 <section id="projects">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Realisations</span>
       <h2>Projets recents</h2>
       <p>Une selection de projets personnels, du prototype a la mise en ligne.</p>
     </div>
     <div class="projects-grid">
-      <div class="project-card">
+      <div class="project-card reveal">
         <div class="project-thumb">Detection Automatique de Documents (OCR)</div>
         <div class="project-body">
           <h4>Module de Detection Automatique de Documents d'Identite</h4>
@@ -447,7 +508,7 @@
           </div>
         </div>
       </div>
-      <div class="project-card">
+      <div class="project-card reveal">
         <div class="project-thumb">Nutrify IA</div>
         <div class="project-body">
           <h4>Nutrify IA - Coach alimentaire intelligent</h4>
@@ -468,12 +529,12 @@
 
 <section id="resume" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Mon parcours</span>
       <h2>Formation</h2>
     </div>
     <div class="timeline">
-      <div class="tl-item">
+      <div class="tl-item reveal">
         <div class="dotmark"></div>
         <div class="tl-date">En cours</div>
         <div class="tl-content">
@@ -489,32 +550,32 @@
 
 <section id="skills">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Savoir-faire</span>
       <h2>Competences techniques</h2>
     </div>
     <div class="skills-grid">
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>Langages</h4>
         <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span></div>
       </div>
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>Data &amp; Machine Learning</h4>
         <div class="tag-row"><span class="tag">Machine Learning</span><span class="tag">Data Modeling</span><span class="tag">Power BI</span></div>
       </div>
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>Vision &amp; OCR</h4>
         <div class="tag-row"><span class="tag">OpenCV</span><span class="tag">Tesseract OCR</span></div>
       </div>
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>Back-end &amp; Web</h4>
         <div class="tag-row"><span class="tag">Flask</span><span class="tag">Streamlit</span><span class="tag">API REST</span></div>
       </div>
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>DevOps &amp; Outils</h4>
         <div class="tag-row"><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">CI/CD</span><span class="tag">Pytest</span></div>
       </div>
-      <div class="skill-cat">
+      <div class="skill-cat reveal">
         <h4>Gestion de projet</h4>
         <div class="tag-row"><span class="tag">Jira</span><span class="tag">Trello</span><span class="tag">Microsoft Project</span></div>
       </div>
@@ -524,27 +585,27 @@
 
 <section id="certifications" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Reconnaissances</span>
       <h2>Certifications</h2>
     </div>
     <div class="cert-grid">
-      <div class="cert-card">
+      <div class="cert-card reveal">
         <div class="icon">&#128200;</div>
         <h4>Data Analyst - Niveau 3</h4>
         <span>Liora</span>
       </div>
-      <div class="cert-card">
+      <div class="cert-card reveal">
         <div class="icon">&#128187;</div>
         <h4>Programming - Level 1</h4>
         <span>Liora (ex-DataScientest)</span>
       </div>
-      <div class="cert-card">
+      <div class="cert-card reveal">
         <div class="icon">&#127760;</div>
         <h4>JavaScript Essentials 1</h4>
         <span>Cisco</span>
       </div>
-      <div class="cert-card">
+      <div class="cert-card reveal">
         <div class="icon">&#127891;</div>
         <h4>C# Fundamentals</h4>
         <span>Microsoft Learn</span>
@@ -555,14 +616,14 @@
 
 <section id="contact">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Travaillons ensemble</span>
       <h2>Me contacter</h2>
     </div>
-    <div class="contact-box">
+    <div class="contact-box reveal">
       <div class="contact-info">
-        <h3>Disponible pour un stage de 5 mois</h3>
-        <p style="margin-top:10px;">Je recherche un stage en Data Analyst, Data Scientist ou Data Engineer.</p>
+        <h3>Disponible pour une alternance &mdash; septembre 2026</h3>
+        <p style="margin-top:10px;">Je recherche une alternance a partir de septembre 2026, en Data Analyst, Data Scientist ou Data Engineer.</p>
         <div style="margin-top:24px;">
           <div class="contact-line"><span class="ic">&#128205;</span> Epinay-sur-Orge, Ile-de-France, France</div>
           <div class="contact-line"><span class="ic">&#9993;</span> rochinel.feujio.pro@gmail.com</div>
@@ -595,10 +656,54 @@
   navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
 
   const toTop = document.getElementById('toTop');
+  const headerEl = document.querySelector('header');
   window.addEventListener('scroll', () => {
     toTop.classList.toggle('show', window.scrollY > 500);
+    headerEl.classList.toggle('scrolled', window.scrollY > 10);
   });
   toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Scroll-reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Typing effect for the hero-card role
+  const roles = [
+    'Data Engineer en formation',
+    'Data Analyst',
+    'Data Scientist',
+    'Alternance a partir de sept. 2026'
+  ];
+  const roleEl = document.getElementById('roleTyped');
+  if(roleEl){
+    let ri = 0, ci = 0, deleting = false;
+    function tick(){
+      const word = roles[ri];
+      if(!deleting){
+        ci++;
+        roleEl.textContent = word.slice(0, ci);
+        if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+      } else {
+        ci--;
+        roleEl.textContent = word.slice(0, ci);
+        if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+      }
+      setTimeout(tick, deleting ? 35 : 65);
+    }
+    setTimeout(tick, 900);
+  }
 </script>
 </body>
 </html>
