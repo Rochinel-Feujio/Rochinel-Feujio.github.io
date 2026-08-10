@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Rochinel FEUJIO | Data Engineer &amp; Developpeur IA</title>
+<meta name="description" content="Portfolio de Rochinel FEUJIO - Etudiant en M1 Data Engineering a ECE Paris. Python, SQL, Machine Learning, OCR/Computer Vision, Streamlit, Docker.">
+<meta name="author" content="Rochinel FEUJIO">
+<meta property="og:title" content="Rochinel FEUJIO | Data Engineer & Developpeur IA">
+<meta property="og:description" content="Portfolio - Python, SQL, Machine Learning, OCR/Computer Vision, Streamlit, Docker.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f8cff'/%3E%3Cstop offset='1' stop-color='%2322d3c7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='46' font-family='Arial' font-weight='800' text-anchor='middle' fill='%230b1120'%3ERF%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0b1120;
+    --bg-soft:#111a2e;
+    --surface:#151f36;
+    --surface-2:#1b2740;
+    --border:#26324d;
+    --text:#e7ecf7;
+    --text-dim:#9aa7c2;
+    --accent:#4f8cff;
+    --accent-2:#22d3c7;
+    --accent-grad: linear-gradient(135deg,#4f8cff 0%, #22d3c7 100%);
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  h1,h2,h3,h4{margin:0 0 12px;font-weight:700;line-height:1.25;}
+  p{margin:0 0 16px;color:var(--text-dim);}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--accent-2);
+    margin-bottom:10px;
+    display:block;
+  }
+  .section-head{max-width:640px;margin:0 auto 48px;text-align:center;}
+  .section-head h2{font-size:clamp(26px,3.4vw,36px);}
+  .section-head p{margin:0;}
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,17,32,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:16px;padding-bottom:16px;
+    position:relative;
+  }
+  .brand{
+    font-weight:800;font-size:18px;letter-spacing:.02em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .brand .tag{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:#0b1120;
+  }
+  .navlinks{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+  .navlinks a{font-size:14.5px;color:var(--text-dim);font-weight:600;transition:color .15s;}
+  .navlinks a:hover{color:var(--text);}
+  .nav-cta{
+    padding:9px 18px;border-radius:999px;
+    background:var(--accent-grad);
+    color:#0b1120;font-weight:700;font-size:14px;
+    white-space:nowrap;
+  }
+  .burger{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;}
+
+  .hero{
+    padding:96px 0 72px;
+    background:
+      radial-gradient(700px 380px at 85% -10%, rgba(79,140,255,.25), transparent 60%),
+      radial-gradient(600px 340px at 5% 10%, rgba(34,211,199,.15), transparent 55%);
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+  .badge-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:999px;
+    background:var(--surface);border:1px solid var(--border);
+    font-size:13px;font-weight:600;color:var(--text-dim);
+    margin-bottom:22px;
+  }
+  .badge-pill .dot{width:8px;height:8px;border-radius:50%;background:#22d3c7;box-shadow:0 0 0 4px rgba(34,211,199,.18);}
+  .hero h1{font-size:clamp(32px,4.6vw,52px);margin-bottom:14px;}
+  .hero h1 span{
+    background:var(--accent-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .lead{font-size:17px;max-width:520px;color:var(--text-dim);}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+  .badges-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .badges-row img{height:26px;border-radius:5px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:10px;
+    font-weight:700;font-size:14.5px;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--accent-grad);color:#0b1120;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-ghost{background:transparent;border-color:var(--border);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  .hero-card{
+    position:relative;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:32px;
+    text-align:center;
+  }
+  .avatar{
+    width:132px;height:132px;border-radius:50%;
+    margin:0 auto 20px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    font-size:44px;font-weight:800;color:#0b1120;
+    border:4px solid var(--surface-2);
+    box-shadow:0 0 0 1px var(--border);
+  }
+  .hero-card h3{margin-bottom:4px;font-size:19px;}
+  .hero-card .role{color:var(--accent-2);font-weight:600;font-size:13.5px;margin-bottom:18px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .chip{
+    font-size:12px;font-weight:700;
+    background:var(--surface-2);border:1px solid var(--border);
+    padding:6px 11px;border-radius:999px;color:var(--text-dim);
+  }
+
+  .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-soft);}
+  .stats .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    padding:40px 24px;gap:20px;text-align:center;
+  }
+  .stat h3{font-size:clamp(26px,3vw,34px);margin-bottom:2px;
+    background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat span{font-size:13px;color:var(--text-dim);font-weight:600;}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:28px;
+    transition:transform .15s, border-color .15s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--accent);}
+  .card .icon{
+    width:44px;height:44px;border-radius:10px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;font-size:20px;
+  }
+  .card h4{font-size:16.5px;}
+  .card p{font-size:14.5px;margin-bottom:14px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{
+    font-size:11.5px;font-weight:700;color:var(--accent-2);
+    background:rgba(34,211,199,.1);
+    padding:4px 9px;border-radius:6px;
+  }
+
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;}
+  .project-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;
+  }
+  .project-thumb{
+    height:150px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:800;color:rgba(11,17,32,.85);
+    letter-spacing:.02em;text-align:center;padding:0 20px;
+  }
+  .project-body{padding:24px;display:flex;flex-direction:column;flex:1;}
+  .project-body h4{font-size:17px;}
+  .project-body p{font-size:14.5px;flex:1;}
+  .project-links{display:flex;gap:14px;margin-top:6px;font-size:13.5px;font-weight:700;}
+  .project-links a{color:var(--accent-2);}
+  .project-links a:hover{text-decoration:underline;}
+
+  .timeline{max-width:760px;margin:0 auto;}
+  .tl-item{
+    display:grid;grid-template-columns:150px 1fr;gap:24px;
+    padding-bottom:32px;position:relative;
+  }
+  .tl-item:not(:last-child)::before{
+    content:"";position:absolute;left:158px;top:22px;bottom:-10px;width:1px;background:var(--border);
+  }
+  .tl-item .dotmark{
+    position:absolute;left:153px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--accent-2);box-shadow:0 0 0 4px rgba(34,211,199,.15);
+  }
+  .tl-date{color:var(--text-dim);font-size:13px;font-weight:700;padding-top:2px;}
+  .tl-content h4{font-size:16px;margin-bottom:2px;}
+  .tl-content .org{color:var(--accent-2);font-size:13.5px;font-weight:600;margin-bottom:8px;}
+  .tl-content p{font-size:14px;margin-bottom:0;}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .skill-cat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
+  .skill-cat h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-2);margin-bottom:14px;}
+  .skill-cat .tag-row .tag{color:var(--text);background:var(--surface-2);}
+
+  .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .cert-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:22px;text-align:center;
+  }
+  .cert-card .icon{
+    width:40px;height:40px;border-radius:50%;margin:0 auto 14px;
+    background:var(--surface-2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .cert-card h4{font-size:14px;margin-bottom:4px;}
+  .cert-card span{font-size:12px;color:var(--text-dim);font-weight:600;}
+
+  .contact-box{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  }
+  .contact-info h3{font-size:20px;}
+  .contact-line{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:14.5px;color:var(--text-dim);}
+  .contact-line .ic{
+    width:34px;height:34px;border-radius:8px;background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;
+  }
+  .social-row{display:flex;gap:12px;margin-top:24px;}
+  .social-row a{
+    padding:10px 18px;border-radius:9px;background:var(--surface-2);border:1px solid var(--border);
+    font-size:13.5px;font-weight:700;
+  }
+  .social-row a:hover{border-color:var(--accent);}
+  .contact-cta{
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    border-left:1px solid var(--border);padding-left:40px;
+  }
+  .contact-cta p{font-size:14.5px;}
+
+  footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;position:relative;}
+  footer p{font-size:13px;margin:0;color:var(--text-dim);}
+
+  #toTop{
+    position:fixed;right:24px;bottom:24px;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--accent-grad);color:#0b1120;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:18px;border:none;cursor:pointer;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+    z-index:60;
+  }
+  #toTop.show{opacity:1;pointer-events:auto;}
+
+  @media(max-width:880px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-card{max-width:380px;margin:0 auto;}
+    .grid-3{grid-template-columns:1fr 1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .cert-grid{grid-template-columns:1fr 1fr;}
+    .stats .wrap{grid-template-columns:1fr 1fr;}
+    .contact-box{grid-template-columns:1fr;}
+    .contact-cta{border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:28px;align-items:flex-start;}
+    .navlinks{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--bg-soft);border-bottom:1px solid var(--border);
+      flex-direction:column;padding:20px 24px;gap:16px;display:none;
+    }
+    .navlinks.open{display:flex;}
+    .burger{display:block;}
+    .nav-cta{display:none;}
+  }
+  @media(max-width:600px){
+    .grid-3{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+    .tl-item{grid-template-columns:1fr;gap:6px;}
+    .tl-item::before,.tl-item .dotmark{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand"><span class="tag">RF</span> Rochinel FEUJIO</a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">A propos</a></li>
+      <li><a href="#expertise">Expertises</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#resume">Parcours</a></li>
+      <li><a href="#skills">Competences</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Me contacter</a>
+    <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="badge-pill"><span class="dot"></span> Disponible pour un stage de 5 mois</span>
+      <h1>Bonjour, je suis <span>Rochinel FEUJIO</span></h1>
+      <p class="lead">Etudiant en <strong>M1 Data Engineering</strong> a ECE Paris, avec des bases solides en
+        Data Science et Machine Learning. Je concois des pipelines de donnees complets - preparation,
+        modelisation, API, automatisation, deploiement - en Python, SQL, OpenCV, Streamlit et Docker.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn btn-ghost">Me contacter</a>
+      </div>
+      <div class="badges-row">
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+        <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white" alt="SQL">
+        <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV">
+        <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit">
+        <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+        <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="avatar">RF</div>
+      <h3>Rochinel FEUJIO</h3>
+      <div class="role">Data Engineer en formation</div>
+      <div class="chip-row">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Machine Learning</span>
+        <span class="chip">Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><h3>3</h3><span>Projets publies</span></div>
+    <div class="stat"><h3>4</h3><span>Certifications</span></div>
+    <div class="stat"><h3>10+</h3><span>Technologies</span></div>
+    <div class="stat"><h3>M1</h3><span>Data Engineering - ECE Paris</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Qui suis-je</span>
+      <h2>A propos</h2>
+      <p>Data Engineer en formation, avec une solide base en Data Science, Machine Learning et Data Engineering.
+      Je developpe des competences avancees en analyse de donnees, modelisation statistique, gouvernance de la
+      donnee et developpement d'outils data en environnement professionnel. J'ai concu et industrialise des
+      solutions utilisant Python, Flask, SQL, Docker et GitHub Actions, avec une attention particuliere portee
+      a la qualite du code, aux tests automatises et a la fiabilite des modeles. Actuellement a la recherche
+      d'un stage de 5 mois en Data Analyst, Data Scientist ou Data Engineer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="expertise" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ce que je fais</span>
+      <h2>Mes expertises</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">&#128193;</div>
+        <h4>Data Engineering</h4>
+        <p>Pipelines de preparation et de modelisation de donnees, gouvernance et qualite de la donnee, automatisation de bout en bout.</p>
+        <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Data Modeling</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">&#128065;</div>
+        <h4>Computer Vision &amp; OCR</h4>
+        <p>Pretraitement d'image (redressement, detection de flou), extraction de texte OCR bilingue par zones ciblees.</p>
+        <div class="tag-row"><span class="tag">OpenCV</span><span class="tag">Tesseract OCR</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">&#127760;</div>
+        <h4>Applications &amp; API</h4>
+        <p>Developpement d'API et d'interfaces web avec Flask et Streamlit, tests automatises, deploiement continu.</p>
+        <div class="tag-row"><span class="tag">Flask</span><span class="tag">Streamlit</span><span class="tag">Pytest</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">&#129302;</div>
+        <h4>Machine Learning</h4>
+        <p>Entrainement et evaluation de modeles (precision, recall, f1-score), approche orientee projets.</p>
+        <div class="tag-row"><span class="tag">Machine Learning</span><span class="tag">Power BI</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">&#128051;</div>
+        <h4>DevOps &amp; Deploiement</h4>
+        <p>Conteneurisation Docker, integration continue via GitHub Actions, redeploiement automatique.</p>
+        <div class="tag-row"><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">CI/CD</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">&#128202;</div>
+        <h4>Gestion de projet</h4>
+        <p>Suivi d'indicateurs et coordination d'equipes pluridisciplinaires en environnement agile.</p>
+        <div class="tag-row"><span class="tag">Power BI</span><span class="tag">Jira</span><span class="tag">Trello</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Realisations</span>
+      <h2>Projets recents</h2>
+      <p>Une selection de projets personnels, du prototype a la mise en ligne.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-thumb">Detection Automatique de Documents (OCR)</div>
+        <div class="project-body">
+          <h4>Module de Detection Automatique de Documents d'Identite</h4>
+          <p>Systeme de reconnaissance automatique de documents d'identite camerounais (CNI ancien/nouveau
+          format, passeport, acte de naissance, diplome, permis, recepisse) a partir d'une simple photo.
+          Correction de perspective, detection de flou, OCR bilingue par zones, repli automatique sur la
+          bande MRZ pour les passeports. Interface Streamlit deployee avec redeploiement automatique a
+          chaque push GitHub.</p>
+          <div class="tag-row" style="margin-bottom:14px;">
+            <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Tesseract OCR</span><span class="tag">Streamlit</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Rochinel-Feujio/projet-objets-perdus" target="_blank" rel="noopener">Voir sur GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">Nutrify IA</div>
+        <div class="project-body">
+          <h4>Nutrify IA - Coach alimentaire intelligent</h4>
+          <p>Application de suivi des repas, du sport, du sommeil et du poids, avec des conseils generes
+          par un moteur de regles. Version web autonome utilisant Firebase (authentification et stockage)
+          et Tesseract.js pour la lecture OCR du poids sur balance.</p>
+          <div class="tag-row" style="margin-bottom:14px;">
+            <span class="tag">HTML / JS</span><span class="tag">Firebase</span><span class="tag">Tesseract.js</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Rochinel-Feujio/NUTRIFY-IA-" target="_blank" rel="noopener">Voir sur GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resume" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Mon parcours</span>
+      <h2>Formation</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="dotmark"></div>
+        <div class="tl-date">En cours</div>
+        <div class="tl-content">
+          <h4>M1 Data Engineering - Master Data Management</h4>
+          <div class="org">ECE Paris - Ecole d'ingenieurs</div>
+          <p>Analyse de donnees, modelisation statistique, gouvernance de la donnee et developpement
+          d'outils data en environnement professionnel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Savoir-faire</span>
+      <h2>Competences techniques</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h4>Langages</h4>
+        <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Data &amp; Machine Learning</h4>
+        <div class="tag-row"><span class="tag">Machine Learning</span><span class="tag">Data Modeling</span><span class="tag">Power BI</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Vision &amp; OCR</h4>
+        <div class="tag-row"><span class="tag">OpenCV</span><span class="tag">Tesseract OCR</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Back-end &amp; Web</h4>
+        <div class="tag-row"><span class="tag">Flask</span><span class="tag">Streamlit</span><span class="tag">API REST</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>DevOps &amp; Outils</h4>
+        <div class="tag-row"><span class="tag">Docker</span><span class="tag">Git / GitHub</span><span class="tag">CI/CD</span><span class="tag">Pytest</span></div>
+      </div>
+      <div class="skill-cat">
+        <h4>Gestion de projet</h4>
+        <div class="tag-row"><span class="tag">Jira</span><span class="tag">Trello</span><span class="tag">Microsoft Project</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" style="background:var(--bg-soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Reconnaissances</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="icon">&#128200;</div>
+        <h4>Data Analyst - Niveau 3</h4>
+        <span>Liora</span>
+      </div>
+      <div class="cert-card">
+        <div class="icon">&#128187;</div>
+        <h4>Programming - Level 1</h4>
+        <span>Liora (ex-DataScientest)</span>
+      </div>
+      <div class="cert-card">
+        <div class="icon">&#127760;</div>
+        <h4>JavaScript Essentials 1</h4>
+        <span>Cisco</span>
+      </div>
+      <div class="cert-card">
+        <div class="icon">&#127891;</div>
+        <h4>C# Fundamentals</h4>
+        <span>Microsoft Learn</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Travaillons ensemble</span>
+      <h2>Me contacter</h2>
+    </div>
+    <div class="contact-box">
+      <div class="contact-info">
+        <h3>Disponible pour un stage de 5 mois</h3>
+        <p style="margin-top:10px;">Je recherche un stage en Data Analyst, Data Scientist ou Data Engineer.</p>
+        <div style="margin-top:24px;">
+          <div class="contact-line"><span class="ic">&#128205;</span> Epinay-sur-Orge, Ile-de-France, France</div>
+          <div class="contact-line"><span class="ic">&#9993;</span> rochinel.feujio.pro@gmail.com</div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/rochinel-feujio/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/Rochinel-Feujio" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="contact-cta">
+        <p>La facon la plus simple de me joindre :</p>
+        <a href="mailto:rochinel.feujio.pro@gmail.com" class="btn btn-primary">Envoyer un email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Rochinel FEUJIO - Tous droits reserves</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Retour en haut">&uarr;</button>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
+  burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 500);
+  });
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
